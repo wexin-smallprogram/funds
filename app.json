@@ -1,14 +1,37 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/optional/index",
+    "pages/hold/index",
     "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#0169f1",
+    "navigationBarTitleText": "基金小程序",
+    "navigationBarTextStyle":"white"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#909090",
+    "selectedColor": "#0169f1",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "市场"
+    }, {
+      "pagePath": "pages/optional/index",
+      "text": "自选"
+    }, {
+      "pagePath": "pages/hold/index",
+      "text": "持有"
+    }, {
+      "pagePath": "pages/logs/logs",
+      "text": "日志"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
 }
