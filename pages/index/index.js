@@ -1,7 +1,9 @@
 // index.js
 // 获取应用实例
 const app = getApp()
-
+wx.cloud.init({
+  traceUser: true,
+})
 Page({
   data: {
     motto: 'Hello World',
@@ -9,7 +11,8 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+    fundsData: []
   },
   // 事件处理函数
   bindViewTap () {
@@ -23,7 +26,7 @@ Page({
         canIUseGetUserProfile: true
       })
     }
-    // this.getFundList()
+    this.getFundList()
   },
   getUserProfile (e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -47,28 +50,29 @@ Page({
     })
   },
   getFundList () {
-    console.log('get data')
-    const url = 'http://vip.stock.finance.sina.com.cn/fund_center/data/jsonp.php/IO.XSRV2.CallbackList["6XxbX6h4CED0ATvW"]/NetValue_Service.getNetValueOpen'
-    wx.request({
-      url: `https://localhost:9999`, //仅为示例，并非真实的接口地址
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'getFunds',
+      // 传给云函数的参数
       data: {
-        url: url,
-        key: 'wy'
+        page: 1,
+        num: 40,
+        sort: '',
+        nav_date: '',
+        asc: 0,
+        ccode: '',
+        type2: 0,
+        type3: ''
       },
-      // page: 1,
-      //   num: 40,
-      //   sort: '',
-      //   nav_date: '',
-      //   asc: 0,
-      //   ccode: '',
-      //   type2: 0,
-      //   type3: ''
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success (res) {
-        console.log(res.data)
-      }
     })
+      .then(res => {
+        let dataStr = JSON.parse(res.result.fundsData)
+        let dataArr = dataStr.split('IO.XSRV2.CallbackList[`6XxbX6h4CED0ATvW`]')
+        let fundsDataStr = dataArr[1].slice(1, -2)
+        let fundsData = JSON.parse(fundsDataStr)
+        console.log(fundsData)
+        this.setData({ fundsData: fundsData.data })
+      })
+      .catch(console.error)
   }
 })
