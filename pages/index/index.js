@@ -66,6 +66,8 @@ Page({
       },
     })
       .then(res => {
+        console.log(res.result)
+        if (!res.result.fundsData) return
         let dataStr = JSON.parse(res.result.fundsData)
         let dataArr = dataStr.split('IO.XSRV2.CallbackList[`6XxbX6h4CED0ATvW`]')
         let fundsDataStr = dataArr[1].slice(1, -2)
@@ -73,6 +75,9 @@ Page({
         console.log(fundsData)
         this.setData({ fundsData: fundsData.data })
       })
-      .catch(console.error)
+      .catch((err) => {
+        console.error(err)
+      })
+
   }
 })
