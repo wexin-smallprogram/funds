@@ -1,4 +1,20 @@
 /**index.wxss**/
+.tabs{
+  width: 100%;  
+}
+.funds{
+  border-bottom: 1px solid #f3f3f3;
+  padding: 30rpx 0;
+}
+.funds-name{
+  font-size: 30rpx;
+}
+.funds-code{
+  font-size: 24rpx;
+}
+
+
+
 .userinfo {
   display: flex;
   flex-direction: column;

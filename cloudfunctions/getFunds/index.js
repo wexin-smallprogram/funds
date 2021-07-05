@@ -9,7 +9,9 @@ exports.main = async (event, context) => {
   for (let key in event) {
     params += `${key}=${event[key]}&`
   }
-  const url = 'http://vip.stock.finance.sina.com.cn/fund_center/data/jsonp.php/IO.XSRV2.CallbackList[`6XxbX6h4CED0ATvW`]/NetValue_Service.getNetValueOpen?' + params
+  // http://fund.eastmoney.com/Data/Fund_JJJZ_Data.aspx?t=1&lx=3&letter=&gsid=&text=&sort=zdf,desc&page=1,200&dt=1625469070561&atfc=&onlySale=0
+  // http://fund.eastmoney.com/Data/Fund_JJJZ_Data.aspx?t=1&lx=2&letter=&gsid=&text=&sort=zdf,desc&page=2,200&dt=1625469462869&atfc=&onlySale=0
+  const url = 'http://fund.eastmoney.com/Data/Fund_JJJZ_Data.aspx?' + params
   console.log(url)
   let resultData = ''
   return new Promise(function (resolve, reject) {
@@ -19,7 +21,8 @@ exports.main = async (event, context) => {
       request.on('data', function (result) {
         //由于数据不是全部接收完毕，该方法会调用很多次，需要把数据拼接到resultData中去；
         // console.log(result)
-        resultData += result;
+        eval(result)
+        resultData = db;
       })
       //数据全部接收完毕以后执行的操作
       request.on('end', function () {

@@ -1,7 +1,33 @@
 <!-- index.wxml -->
 <view class="container">
-  <view wx:for="{{fundsData}}" wx:key="index">{{index}}: {{item.sname}}</view>
-  <view class="userinfo">
+  <!-- <van-button type="primary">按钮</van-button> -->
+  <van-tabs swipeable class="tabs" bind:change="tabsChange">
+    <van-tab title="全部" name="1">
+      <view wx:for="{{fundsData}}" wx:key="index">{{index}}: {{item[1]}}</view>
+    </van-tab>
+    <van-tab title="股票型" name="2">
+      <view wx:for="{{fundsData}}" wx:key="index" class="funds">
+        <van-row class="funds-row">
+          <van-col :span="8">
+            <view class="funds-name">{{item[1]}}</view>
+            <view class="funds-code">{{item[0]}}</view>
+          </van-col>
+          <van-col :span="8">{{ item[5] }}</van-col>
+          <van-col :span="8">{{ item[9] }}</van-col>
+        </van-row>
+      </view>
+    </van-tab>
+    <van-tab title="混合型" name="3">
+      <view wx:for="{{fundsData}}" wx:key="index">{{index}}: {{item[1]}}</view>
+    </van-tab>
+    <van-tab title="指数型" name="5">
+      <view wx:for="{{fundsData}}" wx:key="index">{{index}}: {{item[1]}}</view>
+    </van-tab>
+    <van-tab title="QDII">内容 3</van-tab>
+    <van-tab title="债券型">内容 3</van-tab>
+    <van-tab title="货币型">内容 3</van-tab>
+  </van-tabs>
+  <!-- <view class="userinfo">
     <block wx:if="{{canIUseOpenData}}" calss="userinfo-opendata">
       <view class="userinfo-avatar" bindtap="bindViewTap">
         <open-data type="userAvatarUrl"></open-data>
@@ -22,5 +48,5 @@
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}1</text>
-  </view>
+  </view> -->
 </view>

@@ -49,35 +49,39 @@ Page({
       hasUserInfo: true
     })
   },
-  getFundList () {
+  getFundList (obj = {}) {
     wx.cloud.callFunction({
       // 云函数名称
       name: 'getFunds',
       // 传给云函数的参数
       data: {
-        page: 1,
-        num: 40,
-        sort: '',
-        nav_date: '',
-        asc: 0,
-        ccode: '',
-        type2: 0,
-        type3: ''
+        t: 1,
+        lx: obj.lx || 1,
+        letter: '',
+        gsid: '',
+        text: '',
+        sort: 'zdf,desc',
+        page: '1,20',
+        dt: new Date().getTime(),
+        atfc: '',
+        onlySale: 0
       },
+      // type2: 0全部  2：股票型  1：混合型
     })
       .then(res => {
-        console.log(res.result)
+        // console.log(res.result)
         if (!res.result.fundsData) return
-        let dataStr = JSON.parse(res.result.fundsData)
-        let dataArr = dataStr.split('IO.XSRV2.CallbackList[`6XxbX6h4CED0ATvW`]')
-        let fundsDataStr = dataArr[1].slice(1, -2)
-        let fundsData = JSON.parse(fundsDataStr)
+        let fundsData = JSON.parse(res.result.fundsData)
         console.log(fundsData)
-        this.setData({ fundsData: fundsData.data })
+        this.setData({ fundsData: fundsData.datas })
       })
       .catch((err) => {
         console.error(err)
       })
 
+  },
+  tabsChange (event) {
+    console.log(event)
+    this.getFundList({ lx: event.detail.name })
   }
 })

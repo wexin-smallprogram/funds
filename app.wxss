@@ -5,6 +5,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding: 0 20rpx;
   box-sizing: border-box;
-} 
+}
+/* vantUI */
+.van-tabs__line {
+  background-color: #0169f1!important;
+}
