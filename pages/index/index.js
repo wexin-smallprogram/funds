@@ -12,6 +12,37 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+    fundTypeList: [
+      {
+        title: '全部',
+        name: 1,
+        fundsData: []
+      }, {
+        title: '股票型',
+        name: 2,
+        fundsData: []
+      }, {
+        title: '混合型',
+        name: 3,
+        fundsData: []
+      }, {
+        title: '指数型',
+        name: 5,
+        fundsData: []
+      }, {
+        title: 'QDII',
+        name: 6,
+        fundsData: []
+      }, {
+        title: 'ETF',
+        name: 11,
+        fundsData: []
+      }, {
+        title: '债券型',
+        name: 13
+      }
+    ],
+    active: 2,
     fundsData: []
   },
   // 事件处理函数
@@ -69,14 +100,16 @@ Page({
       // type2: 0全部  2：股票型  1：混合型
     })
       .then(res => {
-        // console.log(res.result)
+        console.group(res.result)
         if (!res.result.fundsData) return
         let fundsData = JSON.parse(res.result.fundsData)
-        console.log(fundsData)
+        console.group(fundsData)
+        console.group(fundsData.datas[0])
         this.setData({ fundsData: fundsData.datas })
       })
       .catch((err) => {
-        console.error(err)
+        console.log(err)
+        this.setData({ fundsData: [] })
       })
 
   },

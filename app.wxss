@@ -8,6 +8,12 @@
   padding: 0 20rpx;
   box-sizing: border-box;
 }
+.red{
+  color: #ff0008;
+}
+.green{
+  color: #00ac12;
+}
 /* vantUI */
 .van-tabs__line {
   background-color: #0169f1!important;

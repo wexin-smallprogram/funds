@@ -6,11 +6,20 @@
   border-bottom: 1px solid #f3f3f3;
   padding: 30rpx 0;
 }
-.funds-name{
+.funds-label{
   font-size: 30rpx;
 }
-.funds-code{
+.funds-value{
   font-size: 24rpx;
+}
+.van-tabs__wrap {
+  position: fixed;
+  top: 0;
+  background: white;
+  z-index: 10;
+}
+.van-tabs__track{
+  margin-top: 45px;
 }
 
 

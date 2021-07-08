@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
       request.setEncoding('utf8');
       request.on('data', function (result) {
         //由于数据不是全部接收完毕，该方法会调用很多次，需要把数据拼接到resultData中去；
-        // console.log(result)
+        console.log(result)
         eval(result)
         resultData = db;
       })
@@ -43,4 +43,3 @@ exports.main = async (event, context) => {
     })
   })
 }
-
